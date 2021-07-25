@@ -39,7 +39,8 @@ const ScheduleForm = ({history}) => {
         setTecData(res3.data.technician)
         console.log(res3.data)
     }
-    const postForm = async () => {
+    const postForm = async (e) => {
+        e.preventDefault()
         const schForm = {
             date : date,
             companyName : company,
@@ -53,8 +54,9 @@ const ScheduleForm = ({history}) => {
             jobType : jobType,
             status : status
         }
-        const res = await axios.post('/schedule/add',schForm)
-        if(res.status() === 200){
+        console.log(schForm)
+        const res = await axios.post('/schedule/add',{schForm})
+        if(res.status === 200){
             history.push({pathName : '/ScheduleTable'})
         }
     }

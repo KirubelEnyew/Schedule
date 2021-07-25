@@ -32,7 +32,6 @@ const Update =({history}) => {
     const handleID = () => {
         setUserData()
         const {
-            _id,
             accessory,
             accessoryQty,
             companyName,
@@ -44,6 +43,7 @@ const Update =({history}) => {
             location,
             status,
             technician,
+            _id,
         } = history.location.state.data;
         setId(_id)
         setAccessoriesQty(accessoryQty)
@@ -58,21 +58,23 @@ const Update =({history}) => {
         setStatus(status)
         setDeviceType(device)
     }
-    const schForm = {
-        date : date,
-        companyName : company,
-        contactNumber : contactNum,
-        location : location,
-        device : type,
-        deviceQty : deviceQty,
-        accessory : accesoriesType,
-        accessoryQty : accesoriesQty,
-        technician : technician,
-        jobType : jobType,
-        status : status
-    }
-    const update = async () => {
+    const update = async (e) => {
+        e.preventDefault()
+        const schForm = {
+            date : date,
+            companyName : company,
+            contactNumber : contactNum,
+            location : location,
+            device : type,
+            deviceQty : deviceQty,
+            accessory : accesoriesType,
+            accessoryQty : accesoriesQty,
+            technician : technician,
+            jobType : jobType,
+            status : status
+        }
         const res = await axios.post(`/schedule/edit/?id=${id}`,schForm)
+        console.log(res.status);
         if(res.status === 200){
             history.push({pathName : '/ScheduleTable'})
         }else{
@@ -97,7 +99,7 @@ const Update =({history}) => {
                 <Box paddingY={3} />
                 <Grid container classes={{root : classes.grid}}>
                     <Grid item md={6} xs={12}>
-                        <form>
+                        <form onSubmit={update}>
                             <Paper>
                                 <Box display='flex' flexDirection='column'>
                                     <Box paddingY={2} />

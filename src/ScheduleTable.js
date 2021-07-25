@@ -26,6 +26,7 @@ const ScheduleTable = ({ history }) => {
                location: row[8],
                status: row[9],
                technician: row[10],
+               _id : row[11],
           }
           history.push({ pathname: '/Update', state: { data: selectedRow } })
      }
@@ -132,6 +133,12 @@ const ScheduleTable = ({ history }) => {
                options: {
                     filter: true,
                     sort: true
+               }
+          },
+          {
+               name : "_id",
+               options : {
+                    display : false,
                }
           },
           {
