@@ -34,7 +34,7 @@ const Accessories = ({ history }) => {
     const deleteAccessories = async () => {
         const delRes = await axios.delete(`/accessory/remove/?id=${id}`)
         if(delRes.status === 200){
-            history.push({pathname:'/Accessories'})
+            history.go()
         }
     }
     return (

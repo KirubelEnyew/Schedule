@@ -24,7 +24,7 @@ const Technicians = ({ history }) => {
         }
         const addRes = await axios.post('/technician/add', technicianInfo)
         if(addRes.status()===200){
-            history.push({pathname:'/Technicians'})
+            history.go()
         }
         else{
             alert("Failed to add new Technician")

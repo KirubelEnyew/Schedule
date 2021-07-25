@@ -2,7 +2,7 @@ import React from 'react';
 import { Select, TextField, MenuItem, Grid, Container, Box, Paper, FormControl, InputLabel, Button} from '@material-ui/core';
 import axios from 'axios' 
 import useStyle from './Styling';
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 const ScheduleForm = ({history}) => {
     const classes = useStyle();
     const [date, setDate] = React.useState('');
@@ -15,6 +15,7 @@ const ScheduleForm = ({history}) => {
     const [accesoriesType, setAccessoriesType] = React.useState("");
     const [jobType, setJobType] = React.useState("");
     const [technician, setTechnician] = React.useState("");
+    const [status,setStatus] = React.useState("");
     const [acsData,setAcsData] = React.useState([]);
     const [devData,setDevData] = React.useState([]);
     const [tecData,setTecData] = React.useState([]);
@@ -26,14 +27,17 @@ const ScheduleForm = ({history}) => {
     const fetchAccessories = async () => {
         const res = await axios.get('/accessories')
         setAcsData(res.data.accessories)
+        console.log(res.data)
     }
     const fetchDevices = async () => {
-        const res = await axios.get('/devices')
-        setDevData(res.data.device)
+        const res2 = await axios.get('/devices')
+        setDevData(res2.data.device)
+        console.log(res2.data)
     }
     const fetchTechnicians = async () => {
-        const res = await axios.get('/technicians')
-        setTecData(res.data.technician)
+        const res3 = await axios.get('/technicians')
+        setTecData(res3.data.technician)
+        console.log(res3.data)
     }
     const postForm = async () => {
         const schForm = {
@@ -47,6 +51,7 @@ const ScheduleForm = ({history}) => {
             accessoryQty : accesoriesQty,
             technician : technician,
             jobType : jobType,
+            status : status
         }
         const res = await axios.post('/schedule/add',schForm)
         if(res.status() === 200){
@@ -64,7 +69,7 @@ const ScheduleForm = ({history}) => {
                             <Paper>
                                 <Box display='flex' flexDirection='column'>
                                     <Box paddingY={2} />
-                                    <Box marginX={3}><TextField required variant="outlined" label = "date" onChange={(e) => { setDate(e.target.value) }} value={date} /></Box>
+                                    <Box marginX={3}><TextField required variant="outlined" label = "Date" onChange={(e) => { setDate(e.target.value) }} value={date} /></Box>
                                     <Box paddingY={2} />
                                     <Box marginX={3}><TextField required fullWidth label="Company" onChange={(e) => { setCompany(e.target.value) }} value={company} /></Box>
                                     <Box paddingY={2} />
@@ -92,8 +97,8 @@ const ScheduleForm = ({history}) => {
                                             value={accesoriesType}
                                             onChange={(e) => { setAccessoriesType(e.target.value) }}
                                         >
-                                            {acsData.map((acsValues)=>(
-                                                <MenuItem value = {acsValues.accessory}>{acsValues.accessory}</MenuItem>
+                                            {acsData.map((values)=>(
+                                                <MenuItem value = {values.accessoryName}>{values.accessoryName}</MenuItem>
                                             ))}
                                             </Select>
                                     </FormControl>
@@ -105,8 +110,8 @@ const ScheduleForm = ({history}) => {
                                         <Select required
                                             value={technician}
                                             onChange={(e) => { setTechnician(e.target.value) }}
-                                        >{tecData.map((tecValues)=>(
-                                            <MenuItem value = {tecValues.technician}>{tecValues.technician}</MenuItem>
+                                        >{tecData.map((values)=>(
+                                            <MenuItem value = {values.technicianName}>{values.technicianName}</MenuItem>
                                         ))}
                                         </Select>
                                     </FormControl>
@@ -123,11 +128,24 @@ const ScheduleForm = ({history}) => {
                                             <MenuItem value={"Replacement"}>Replacement</MenuItem>
                                         </Select>
                                     </FormControl>
+                                    <FormControl classes={{root : classes.formControl}}>
+                                        <InputLabel>Status</InputLabel>
+                                        <Select required
+                                            value={status}
+                                            onChange={(e) => { setStatus(e.target.value) }}
+                                        >
+                                            <MenuItem value={"Ongoing"}>Ongoing</MenuItem>
+                                            <MenuItem value={"Incomplete"}>Incomplete</MenuItem>
+                                            <MenuItem value={"Completed"}>Completed</MenuItem>
+                                        </Select>
+                                    </FormControl>
                                     <Box paddingY={3} />
                                     <Box display="flex" flexDirection='row' marginX={3}>
                                         <Button type="submit" classes={{root : classes.submitBtn}}>Submit</Button>
                                         <Box paddingX={2} />
+                                        <Link className={classes.links} to = '/ScheduleTable'>
                                         <Button classes={{ root: classes.cancelBtn }}>Cancel</Button>
+                                        </Link>
                                     </Box>
                                     <Box paddingY={2} />
                                 </Box>

@@ -5,14 +5,14 @@ import useStyle from '../../Styling';
 import { Link, withRouter } from 'react-router-dom'
 const Home =() => {
     const classes = useStyle()
-    const [mobileScreen, setMobileScreen] = React.useState(false);
+    const [mobileScreen, setMobileScreen] = React.useState(true);
     const handleMobileScreen = () => {
         setMobileScreen(!mobileScreen);
     }
     const drawerHeader = (
         <div>
             <Box display='flex' justifyContent='center' p={2}>
-                <Typography variant='h6' classes={{root : classes.itemHeader}}>Mella Tech</Typography>
+                <Typography variant='h6' classes={{root : classes.itemHeader}}>Mella Tech Scheduling System</Typography>
             </Box>
         </div>
     )
@@ -30,7 +30,7 @@ const Home =() => {
                 <Link to = '/ScheduleTable' className={classes.links}>
                 <ListItem classes = {{root: classes.itemColor}} button>
                     <ListItemIcon><CalendarToday /></ListItemIcon>
-                    <ListItemText>Schedule</ListItemText>
+                    <ListItemText>Schedules</ListItemText>
                 </ListItem>
                 <Box height = {20}/>
                 </Link>

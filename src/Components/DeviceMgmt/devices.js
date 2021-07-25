@@ -41,7 +41,7 @@ const Devices = ({ history }) => {
         const delRes = await axios.delete(`/device/remove/?id=${id}`)
         console.log(delRes.status)
         if(delRes.status === 200){
-            history.push({ pathname: '/Devices' })
+            history.go()
         }
     }
     return (
