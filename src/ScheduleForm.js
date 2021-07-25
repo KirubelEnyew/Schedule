@@ -6,16 +6,16 @@ import { Link, withRouter } from 'react-router-dom'
 const ScheduleForm = ({history}) => {
     const classes = useStyle();
     const [date, setDate] = React.useState('');
-    const [type, setDeviceType] = React.useState("");
+    const [type, setDeviceType] = React.useState('');
     const [company, setCompany] = React.useState('');
     const [location, setLocation] = React.useState('');
-    const [contactNum, setContactNum] = React.useState('');
+    const [contactNum, setContactNum] = React.useState(0);
     const [accesoriesQty, setAccessoriesQty] = React.useState(0);
     const [deviceQty, setDeviceQty] = React.useState(0);
-    const [accesoriesType, setAccessoriesType] = React.useState("");
-    const [jobType, setJobType] = React.useState("");
-    const [technician, setTechnician] = React.useState("");
-    const [status,setStatus] = React.useState("");
+    const [accesoriesType, setAccessoriesType] = React.useState('');
+    const [jobType, setJobType] = React.useState('');
+    const [technician, setTechnician] = React.useState('');
+    const [status,setStatus] = React.useState('');
     const [acsData,setAcsData] = React.useState([]);
     const [devData,setDevData] = React.useState([]);
     const [tecData,setTecData] = React.useState([]);
@@ -55,9 +55,9 @@ const ScheduleForm = ({history}) => {
             status : status
         }
         console.log(schForm)
-        const res = await axios.post('/schedule/add',{schForm})
+        const res = await axios.post('/schedule/add',schForm)
         if(res.status === 200){
-            history.push({pathName : '/ScheduleTable'})
+            history.push('/ScheduleTable')
         }
     }
     return (
@@ -161,12 +161,5 @@ const ScheduleForm = ({history}) => {
 }
 export default withRouter(ScheduleForm);
 
-// onClick = {
-//     ()=> history.push({
-//         pathname: '/template',
-//         state: { data: {name: 'kira', age: 23} }
-//       })
-// }
-
-// const {name, age} = history.location.state.data
+//done
 

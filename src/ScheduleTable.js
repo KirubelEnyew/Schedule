@@ -139,6 +139,7 @@ const ScheduleTable = ({ history }) => {
                name : "_id",
                options : {
                     display : false,
+                    filter : false,
                }
           },
           {
@@ -163,7 +164,7 @@ const ScheduleTable = ({ history }) => {
      return (
           <div className={classes.root}>
                <MUIDataTable
-                    title={"schedule list"}
+                    title={"Table Of Schedules"}
                     data={data}
                     columns={columns}
                     options={options}
@@ -173,3 +174,4 @@ const ScheduleTable = ({ history }) => {
 }
 
 export default withRouter(ScheduleTable);
+//done

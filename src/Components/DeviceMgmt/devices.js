@@ -100,3 +100,4 @@ const Devices = ({ history }) => {
 }
 
 export default withRouter(Devices);
+//done

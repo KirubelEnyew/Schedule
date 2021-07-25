@@ -9,7 +9,7 @@ const Update =({history}) => {
     const [type, setDeviceType] = React.useState('');
     const [company, setCompany] = React.useState('');
     const [location, setLocation] = React.useState('');
-    const [contactNum, setContactNum] = React.useState('');
+    const [contactNum, setContactNum] = React.useState(0);
     const [accesoriesQty, setAccessoriesQty] = React.useState(0);
     const [deviceQty, setDeviceQty] = React.useState(0);
     const [accesoriesType, setAccessoriesType] = React.useState('');
@@ -76,7 +76,7 @@ const Update =({history}) => {
         const res = await axios.post(`/schedule/edit/?id=${id}`,schForm)
         console.log(res.status);
         if(res.status === 200){
-            history.push({pathName : '/ScheduleTable'})
+            history.push('/ScheduleTable')
         }else{
             alert("Failed to Update Information")
         }
@@ -197,3 +197,4 @@ const Update =({history}) => {
 }
 
 export default withRouter(Update) ;
+//done
